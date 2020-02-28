@@ -6,6 +6,9 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField]
     private float moveSpeed = 200;
+    
+    [SerializeField]
+    private float strafeSpeed = 200;
 
     [SerializeField]
     private float rotateSpeed = 100;
@@ -73,7 +76,20 @@ public class PlayerMovement : MonoBehaviour
 
     private void Move()
     {
+        Vector3 sVelocity = Vector3.zero;
+        if (Input.GetKey(KeyCode.Q) && !Input.GetKey(KeyCode.E))
+        {
+            sVelocity = -transform.right * strafeSpeed * Time.deltaTime;
+        }
+        if (Input.GetKey(KeyCode.E) && !Input.GetKey(KeyCode.Q))
+        {
+            sVelocity = transform.right * strafeSpeed * Time.deltaTime;
+        }
+
         Vector3 velocity = transform.forward * Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
+
+        velocity += sVelocity;
+
         rb.velocity = new Vector3(velocity.x, rb.velocity.y, velocity.z);
     }
 
