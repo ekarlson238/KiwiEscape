@@ -22,6 +22,8 @@ public class PlayerMovement : MonoBehaviour
     public bool grounded = false;
 
     private bool jumped = false;
+    private bool isStunned = false;
+    private float stunReleaseTime;
 
     // Start is called before the first frame update
     void Start()
@@ -32,9 +34,19 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Move();
+        if(isStunned)
+        {
+            if(Time.fixedTime > stunReleaseTime)
+            {
+                Unstun();
+            }
+        }
+        else
+        {
+            Move();
+            Jump();
+        }
         Rotate();
-        Jump();
     }
 
     private void Jump()
@@ -63,5 +75,21 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector3 velocity = transform.forward * Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
         rb.velocity = new Vector3(velocity.x, rb.velocity.y, velocity.z);
+    }
+
+    /// <summary>Locks the player's ability to move</summary>
+    /// <param name="stunDuration">How long to stun the player for</param>
+    public void Stun(float stunDuration)
+    {
+        isStunned = true;
+        stunReleaseTime = Time.time + stunDuration;
+
+        // Implement start of special animations/effects here.
+    }
+    private void Unstun()
+    {
+        isStunned = false;
+        
+        // Implement end of special animations/effects here.
     }
 }
