@@ -31,13 +31,24 @@ public sealed class AudioManager : MonoBehaviour
 
     private void Start()
     {
+        BGM = new Dictionary<BackgroundTrack, AudioClip>();
+        SFX = new Dictionary<SoundEffect, AudioClip[]>();
+
         self = this;
         BGMSource.loop = true;
         SFXSource.loop = false;
-        BGM[BackgroundTrack.Menu] = menuBGM;
-        BGM[BackgroundTrack.Gameplay] = gameplayBGM;
+        //BGM[BackgroundTrack.Menu] = menuBGM;
+        //BGM[BackgroundTrack.Gameplay] = gameplayBGM;
         SFX[SoundEffect.KiwiHurt] = kiwiHurt;
-        SFX[SoundEffect.KiwiJump] = kiwiJump;
+        //SFX[SoundEffect.KiwiJump] = kiwiJump;
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.F))
+        {
+            AudioManager.PlaySoundEffect(SoundEffect.KiwiHurt);
+        }
     }
 
     public static void SetBackgroundMusic(BackgroundTrack track)
