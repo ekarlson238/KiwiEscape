@@ -1,28 +1,57 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Collectable : MonoBehaviour
 {
+    // This could be put in its own static class:
+    private static int playerCollectableCount;
+    public static int PlayerCollectableCount
+    {
+        get
+        {
+            return playerCollectableCount;
+        }
+        set
+        {
+            playerCollectableCount = value;
+            OnCollectableCountChanged?.Invoke(value);
+        }
+    }
+    public delegate void ValueChangedHandler(int newValue);
+    public static event ValueChangedHandler OnCollectableCountChanged;
+
+
+    [SerializeField] private Transform pickupRenderedChild;
+
+    private float unTouchableTime = 2;
+    private float spawnTime;
     private float spinRate = 90;
 
-    private float pickupDuration = 2;
+    private float pickupDuration = 0.6f;
     private float pickupStartTime;
     private float pickupArcHeight = 2;
     private Vector3 startPosition;
     private Transform targetPosition;
     private Vector3 startScale;
 
+
+
+    void Start()
+    {
+        spawnTime = Time.time;
+    }
+
     void Update()
     {
-        transform.eulerAngles += Vector3.up * spinRate * Time.deltaTime;
+        pickupRenderedChild.eulerAngles += Vector3.up * spinRate * Time.deltaTime;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player")
+        if(other.tag == "Player" && Time.time - spawnTime > unTouchableTime)
         {
-            gameObject.GetComponent<SphereCollider>().enabled = false;
+            playerCollectableCount++;
+            pickupRenderedChild.GetComponent<SphereCollider>().enabled = false;
             pickupStartTime = Time.time;
             startPosition = transform.position;
             startScale = transform.localScale;
@@ -31,25 +60,63 @@ public class Collectable : MonoBehaviour
         }
     }
 
+    // Animation for when the collectable is gotten by the player.
     private IEnumerator ObtainCollectable()
     {
-        Debug.Log("coroutine");
-        float interpolant = (Time.time - pickupStartTime) / pickupDuration;
+        while(true)
+        {
+            float interpolant = (Time.time - pickupStartTime) / pickupDuration;
 
-        if(interpolant < 1)
-        {
-            transform.localScale = Vector3.Lerp(startScale, Vector3.zero, interpolant);
-            transform.position = new Vector3(
-                Mathf.Lerp(startPosition.x, targetPosition.position.x, interpolant),
-                targetPosition.position.y + pickupArcHeight * (1 -Mathf.Pow(2*interpolant - 1,2)),
-                Mathf.Lerp(startPosition.z, targetPosition.position.z, interpolant)
-                );
-        }
-        else
-        {
-            Destroy(gameObject);
+            if (interpolant < 1)
+            {
+                transform.localScale = Vector3.Lerp(startScale, Vector3.zero, interpolant);
+                transform.position = new Vector3(
+                    Mathf.Lerp(startPosition.x, targetPosition.position.x, interpolant),
+                    targetPosition.position.y + pickupArcHeight * (1 -Mathf.Pow(2*interpolant - 1,2)),
+                    Mathf.Lerp(startPosition.z, targetPosition.position.z, interpolant)
+                    );
+            }
+            else
+            {
+                Destroy(gameObject);
+                break;
+            }
             yield return null;
         }
-        yield return new WaitForEndOfFrame();
+    }
+
+    private float dissapearDuration;
+    private float dissapearStartTime;
+    public void MarkDissapearing(float timeToDissapear)
+    {
+        dissapearDuration = timeToDissapear;
+        dissapearStartTime = Time.time;
+        StartCoroutine(BlinkOut());
+    }
+    private IEnumerator BlinkOut()
+    {
+        while (true)
+        {
+            float interpolant = (Time.time - dissapearStartTime) / dissapearDuration;
+
+            if (interpolant < 1)
+            {
+                // Fading function gotten from desmos
+                if(Mathf.Floor(0.07f - (Mathf.Sin(50 * interpolant) * 0.05f + 0.1f * interpolant)) == 0)
+                {
+                    pickupRenderedChild.gameObject.SetActive(true);
+                }
+                else
+                {
+                    pickupRenderedChild.gameObject.SetActive(false);
+                }
+            }
+            else
+            {
+                Destroy(gameObject);
+                break;
+            }
+            yield return null;
+        }
     }
 }
