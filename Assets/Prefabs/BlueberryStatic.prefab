@@ -12,10 +12,8 @@ GameObject:
   - component: {fileID: 1072401832564518622}
   - component: {fileID: 1072401832564518623}
   - component: {fileID: 1072401832564518620}
-  - component: {fileID: 1072401832564518616}
-  - component: {fileID: 5628739705015505932}
   m_Layer: 0
-  m_Name: Blueberry
+  m_Name: BlueberryStatic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -94,37 +92,3 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1072401832564518616
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1072401832564518621}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65847385a212c254097feb787fccabeb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 6
-  knockbackForce: 11
-  lifeTime: 3
---- !u!114 &5628739705015505932
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1072401832564518621}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 821555e705e1c284dba4d912899e3fab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  knockbackVelocity: {x: 0, y: 0, z: 0}
-  knockbackDuration: 0.6
-  doesPlayerDropCollectables: 1
-  collectablesToDrop: 3
-  dropForce: 5
-  collectablePrefab: {fileID: 54148034516595455, guid: 9ac6ef50c5b04f9489c0a65d1e2fcec8,
-    type: 3}
