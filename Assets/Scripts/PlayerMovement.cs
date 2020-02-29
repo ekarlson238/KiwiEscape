@@ -56,6 +56,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetAxis("Jump") != 0 && grounded && !jumped)
         {
+            rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
             rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
             jumped = true;
         }
