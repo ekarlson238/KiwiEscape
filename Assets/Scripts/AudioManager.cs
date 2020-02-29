@@ -10,7 +10,9 @@ public enum BackgroundTrack
 public enum SoundEffect
 {
     KiwiHurt,
-    KiwiJump
+    KiwiJump,
+    KiwiEat,
+    KiwiTweet
 }
 
 public sealed class AudioManager : MonoBehaviour
@@ -25,6 +27,8 @@ public sealed class AudioManager : MonoBehaviour
 
     [SerializeField] private AudioClip[] kiwiHurt;
     [SerializeField] private AudioClip[] kiwiJump;
+    [SerializeField] private AudioClip[] kiwiEat;
+    [SerializeField] private AudioClip[] kiwiTweet;
 
     private Dictionary<BackgroundTrack, AudioClip> BGM;
     private Dictionary<SoundEffect, AudioClip[]> SFX;
@@ -38,17 +42,11 @@ public sealed class AudioManager : MonoBehaviour
         BGMSource.loop = true;
         SFXSource.loop = false;
         //BGM[BackgroundTrack.Menu] = menuBGM;
-        //BGM[BackgroundTrack.Gameplay] = gameplayBGM;
+        BGM[BackgroundTrack.Gameplay] = gameplayBGM;
         SFX[SoundEffect.KiwiHurt] = kiwiHurt;
-        //SFX[SoundEffect.KiwiJump] = kiwiJump;
-    }
-
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.F))
-        {
-            AudioManager.PlaySoundEffect(SoundEffect.KiwiHurt);
-        }
+        SFX[SoundEffect.KiwiJump] = kiwiJump;
+        SFX[SoundEffect.KiwiEat] = kiwiEat;
+        SFX[SoundEffect.KiwiTweet] = kiwiTweet;
     }
 
     public static void SetBackgroundMusic(BackgroundTrack track)

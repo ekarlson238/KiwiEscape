@@ -47,10 +47,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BGMSource: {fileID: 3785862741908688013}
   SFXSource: {fileID: 3785862741908688012}
-  menuBGM: {fileID: 0}
-  gameplayBGM: {fileID: 0}
-  kiwiHurt: []
-  kiwiJump: []
+  menuBGM: {fileID: 8300000, guid: 6f2e9545343d76243b8d6052b468bdab, type: 3}
+  gameplayBGM: {fileID: 8300000, guid: 6f2e9545343d76243b8d6052b468bdab, type: 3}
+  kiwiHurt:
+  - {fileID: 8300000, guid: f42360caf6f80cb4cafd2271b9e05168, type: 3}
+  - {fileID: 8300000, guid: 4fe9994b8b9289345a4a5574457d3c32, type: 3}
+  - {fileID: 8300000, guid: a7921890c64e97c4e963095db46b7bae, type: 3}
+  - {fileID: 8300000, guid: 9e38602b76953bb4abee9766fb1513fb, type: 3}
+  - {fileID: 8300000, guid: 89c88e7a4e7a5fb4c9f886dfd990d878, type: 3}
+  kiwiJump:
+  - {fileID: 8300000, guid: 80fc80ed2e353b44d9e9325b0195292c, type: 3}
+  kiwiEat:
+  - {fileID: 8300000, guid: d7fdbe4008b6a7f4da7924513332b8a9, type: 3}
+  kiwiTweet:
+  - {fileID: 8300000, guid: 5802e73d2be420e43a262a1a6cdf5fca, type: 3}
+  - {fileID: 8300000, guid: d6de2f43abad4ec48b816f79d8ad0082, type: 3}
+  - {fileID: 8300000, guid: 7bb6151f8f0cd7c4896ba54b096122cb, type: 3}
+  - {fileID: 8300000, guid: 228912c8158fa2e45976544263b6719b, type: 3}
+  - {fileID: 8300000, guid: 2b29ca610a9fc2045963420087172611, type: 3}
+  - {fileID: 8300000, guid: 813e6112d5fc812438e9256ff3280b97, type: 3}
+  - {fileID: 8300000, guid: 89dc3d5c5d3af4845aa2a59b1126c482, type: 3}
 --- !u!82 &3785862741908688013
 AudioSource:
   m_ObjectHideFlags: 0
