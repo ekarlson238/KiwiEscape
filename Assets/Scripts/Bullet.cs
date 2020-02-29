@@ -8,9 +8,21 @@ public class Bullet : MonoBehaviour
     private float speed = 5;
 
     [SerializeField]
+    private float knockbackForce = 5;
+
+    private KnockbackObstacle knockback;
+
+    [SerializeField]
     private float lifeTime = 5;
 
     private float lifeTimer = 0;
+
+    private void Start()
+    {
+        knockback = GetComponent<KnockbackObstacle>();
+
+        knockback.knockbackVelocity = new Vector3(transform.forward.x, 0.5f, transform.forward.z) * knockbackForce;
+    }
 
     // Update is called once per frame
     void FixedUpdate()

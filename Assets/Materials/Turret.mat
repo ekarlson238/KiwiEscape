@@ -71,13 +71,13 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _Shininess: 1
+    - _Shininess: 0.01
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.254717, g: 0.23361857, b: 0.21506765, a: 1}
+    - _Color: {r: 0.29125136, g: 0.3301887, b: 0.31502363, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _SpecColor: {r: 0.24528301, g: 0.16630578, b: 0.10297258, a: 1}
+    - _SpecColor: {r: 0.38461193, g: 0.6320754, b: 0.5920446, a: 1}
