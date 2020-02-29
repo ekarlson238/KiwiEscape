@@ -21,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody rb;
 
-    [HideInInspector]
+    //[HideInInspector]
     public bool grounded = false;
 
     private bool jumped = false;
