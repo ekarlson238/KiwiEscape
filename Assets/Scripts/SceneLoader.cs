@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
@@ -8,12 +9,12 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadMenuScene()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("StartMenu");
+        SceneManager.LoadScene("StartMenu");
     }
 
-    //public void LoadGameScene()
-    //{
-    //    UnityEngine.SceneManagement.SceneManager.LoadScene();
-    //}
+    public void LoadGameScene()
+    {
+        SceneManager.LoadScene(1);
+    }
 
 }
