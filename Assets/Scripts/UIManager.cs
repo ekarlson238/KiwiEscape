@@ -5,7 +5,7 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
 
-    [SerializeField] Canvas UICanvas;
+    [SerializeField] Canvas UICanvas; //Assign persistent UI Canvas
 
     void Start()
     {
