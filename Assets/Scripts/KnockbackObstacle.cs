@@ -46,5 +46,11 @@ public class KnockbackObstacle : MonoBehaviour
             }
         }
     }
-
+    
+    private void ApplyKnockback(PlayerMovement player, Rigidbody body)
+    {
+        player.Stun(knockbackDuration);
+        AudioManager.PlaySoundEffect(SoundEffect.KiwiHurt);
+        body.AddForce(knockbackVelocity, ForceMode.Impulse);
+    }
 }
