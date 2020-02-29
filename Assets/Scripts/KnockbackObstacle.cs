@@ -31,8 +31,8 @@ public class KnockbackObstacle : MonoBehaviour
             {
                 player.Stun(knockbackDuration);
 
-                int dropCount = Mathf.Min(Collectable.playerCollectableCount, collectablesToDrop);
-                Collectable.playerCollectableCount -= dropCount;
+                int dropCount = Mathf.Min(Collectable.PlayerCollectableCount, collectablesToDrop);
+                Collectable.PlayerCollectableCount -= dropCount;
 
                 for(int i = 0; i < dropCount; i++)
                 {
