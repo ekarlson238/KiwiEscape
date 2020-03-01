@@ -28,10 +28,17 @@ public class PlayerMovement : MonoBehaviour
     private bool isStunned = false;
     private float stunReleaseTime;
 
+    [SerializeField]
+    private AudioClip jumpTweetA;
+    [SerializeField]
+    private AudioClip jumpTweetB;
+    private AudioSource playerAudio;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        playerAudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -59,10 +66,12 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
             rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
             jumped = true;
+            playerAudio.PlayOneShot(jumpTweetA, 1.0f);
         }
         else if (Input.GetAxis("Jump") != 0 && !grounded && rb.velocity.y < 0)
         {
             rb.velocity = new Vector3(rb.velocity.x, -glideFallSpeed, rb.velocity.z);
+            playerAudio.PlayOneShot(jumpTweetB, 0.1f);
         }
         else if (Input.GetAxis("Jump") == 0 && grounded)
         {
