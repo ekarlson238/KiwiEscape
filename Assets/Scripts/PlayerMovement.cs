@@ -32,6 +32,8 @@ public class PlayerMovement : MonoBehaviour
     private AudioClip jumpTweetA;
     [SerializeField]
     private AudioClip jumpTweetB;
+    [SerializeField]
+    private AudioClip damageTweet;
     private AudioSource playerAudio;
 
     // Start is called before the first frame update
@@ -111,6 +113,7 @@ public class PlayerMovement : MonoBehaviour
         stunReleaseTime = Time.time + stunDuration;
 
         // Implement start of special animations/effects here.
+        playerAudio.PlayOneShot(damageTweet, 1.0f);
     }
     private void Unstun()
     {

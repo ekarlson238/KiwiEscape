@@ -34,11 +34,15 @@ public class Collectable : MonoBehaviour
     private Transform targetPosition;
     private Vector3 startScale;
 
-
+    //sound
+    [SerializeField]
+    private AudioClip collectSound;
+    private AudioSource cherryAudio;
 
     void Start()
     {
         spawnTime = Time.time;
+        cherryAudio = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -50,6 +54,7 @@ public class Collectable : MonoBehaviour
     {
         if(other.tag == "Player" && Time.time - spawnTime > unTouchableTime)
         {
+            cherryAudio.PlayOneShot(collectSound, 1.0f);
             playerCollectableCount++;
             pickupRenderedChild.GetComponent<SphereCollider>().enabled = false;
             pickupStartTime = Time.time;
